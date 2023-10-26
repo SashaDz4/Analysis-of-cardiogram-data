@@ -16,10 +16,8 @@ def basic_statistical_parameters(data):
     print(f"Harmonic mean: {harmonic_mean}")
 
     # calculate geometric mean
-    geometric_mean = np.exp(np.mean(np.log(data)))
-    if geometric_mean != geometric_mean or geometric_mean:
-        print(f"Geometric mean: {geometric_mean}. Geometric mean is negative")
-
+    geometric_mean = np.exp(np.mean(np.log(np.abs(data))))
+    print(f"Geometric mean: {geometric_mean}")
     # calculate dispersion
     dispersion = np.std(data)
     print(f"Dispersion: {dispersion}")
@@ -56,8 +54,6 @@ def plot_cardiogram(data):
 
 
 if __name__ == "__main__":
-    file_name = 'A23.txt'
-
     for i in range(all_channels.shape[1]):
         print(f"Chanel {i + 1}")
         channel = all_channels[:, i]
@@ -65,12 +61,8 @@ if __name__ == "__main__":
         # print basic statistical parameters
         basic_statistical_parameters(channel)
 
-        # plot data
-        plot_cardiogram(channel)
-
         # Normalize data
         channel = (channel - np.mean(channel)) / np.std(channel)
-
-        # plot data
         plot_cardiogram(channel)
+
         print()

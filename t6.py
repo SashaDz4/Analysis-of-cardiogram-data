@@ -24,17 +24,18 @@ def plot_clustering_results(data, labels, centers):
 
 
 if __name__ == "__main__":
+    all_channels = all_channels[:1000, :]
     eig_vals, eig_vecs = np.linalg.eig(corr)
     basic_components = np.dot(all_channels, eig_vecs[:, :3])
 
     # A
     labels, centers = k_means_clustering(all_channels, 5)
     plot_clustering_results(all_channels[:, 0], labels, centers[:, 0])
-    # labels, centers = k_means_clustering(all_channels, 7)
-    # plot_clustering_results(all_channels[:, 0], labels, centers[:, 0])
+    labels, centers = k_means_clustering(all_channels, 7)
+    plot_clustering_results(all_channels[:, 0], labels, centers[:, 0])
 
     # B
     labels, centers = k_means_clustering(basic_components, 5)
     plot_clustering_results(basic_components[:, 0], labels, centers[:, 0])
-    # labels, centers = k_means_clustering(basic_components, 7)
-    # plot_clustering_results(basic_components[:, 0], labels, centers[:, 0])
+    labels, centers = k_means_clustering(basic_components, 7)
+    plot_clustering_results(basic_components[:, 0], labels, centers[:, 0])
